@@ -83,9 +83,9 @@
 	
 	\vspace*{0.2cm}
 	\begin{itemize}
-		\item $M(v)\coloneqq h_{p,q}(v)$, $P(u,n)\coloneqq h_{r,s}(u)n_\oplus$ where 
+		\item $\alert{M(v)}\coloneqq h_{p,q}(v)$, $\alert{P(u,n)}\coloneqq h_{r,s}(u)n_\oplus$ for certain $p,q,r,s\in\N$, where 
 		$$
-		h_{p,q}(v)\coloneqq K_{p,q}v_\oplus^p(1-v)_\oplus^q
+		\alert{h_{p,q}(v)}\coloneqq K_{p,q}v_\oplus^p(1-v)_\oplus^q
 		$$
 		with $K_{p,q}>0$ a constant so that $\max_{x\in\R}h_{p,q}(v)=1$.
 		\item<2> \myframed{Cells-nutrients chemical reactions.}
@@ -94,25 +94,26 @@
 \end{frame}
 
 \begin{frame}{Properties of the model}
-	\begin{proposition}
-		Let $u_0,v_0\in[0,1]$, then $u(t),n(t)\in[0,1]$ for a.e. $t\in(0,T)$.
+	\begin{proposition}[Pointwise bounds]
+		Let $u_0,v_0\in[0,1]$, then \alert{$u(t),n(t)\in[0,1]$} for a.e. $t\in(0,T)$.
 	\end{proposition}
-	\begin{proposition}
-		The total mass of tumor cells and nutrients is conserved: $$\frac{d}{dt}\int_\Omega (u(x,t)+n(x,t))dx=0.$$
+	\vspace*{0.6cm}
+	\begin{proposition}[Mass conservation]
+		The total mass of tumor cells and nutrients is conserved: $$\alert{\frac{d}{dt}\int_\Omega (u(x,t)+n(x,t))dx=0}.$$
 	\end{proposition}
 \end{frame}
 \begin{frame}{Properties of the model}
 	\scriptsize
-	\begin{proposition}
+	\begin{proposition}[Energy law]
 		If $\partial_t u\in L^2(0,T, H^1(\Omega))$, then it satisfies the following energy law
 		\begin{align*}
 			\frac{d E(u(t),n(t))}{dt}&+C_u\int_\Omega M(u(x,t))|\nabla\mu_u(x,t)|^2dx+C_n\int_\Omega M(n(x,t))|\nabla\mu_n(x,t)|^2\notag\\&+\delta P_0\int_\Omega P(u(x,t),n(x,t))(\mu_u(x,t)-\mu_n(x,t))_\oplus ^2dx=0,
 		\end{align*}
 		where
 		\begin{align*}
-			E(u(t),n(t))&\coloneqq\int_\Omega\left(\frac{\varepsilon^2}{2}|\nabla u(x,t)|^2+ F(u(x,t))-\chi_0u(x,t)n(x,t)+\frac{1}{2\delta}\left(n(x,t)\right)^2\right)dx.
+			\alert{E(u(t),n(t))}&\coloneqq\int_\Omega\left(\frac{\varepsilon^2}{2}|\nabla u(x,t)|^2+ F(u(x,t))-\chi_0u(x,t)n(x,t)+\frac{1}{2\delta}\left(n(x,t)\right)^2\right)dx.
 		\end{align*}
-		Therefore, the solution is energy stable in the sense $$\frac{d}{dt}E(u(t),n(t))\le 0.$$
+		Therefore, the solution is \structure{energy stable} in the sense $$\alert{\frac{d}{dt}E(u(t),n(t))\le 0}.$$
 	\end{proposition}
 \end{frame}
 
@@ -152,6 +153,7 @@
 	\end{itemize}
 	\end{minipage}
 	\begin{minipage}{0.29\textwidth}
+		\vspace*{-0.5cm}
 		\begin{figure}
 			\centering
 			\includegraphics[scale=0.7]{img/orientation_n.pdf}
@@ -162,18 +164,20 @@
 
 \begin{frame}{Projection and regularization operators}
 	Let $g\in L^1(\Omega)$.
+	\vspace*{0.3cm}
 
 	\begin{itemize}
-		\item Projection $\Pi_0\colon L^1(\Omega) \rightarrow \Pd_0(\T_h)$:
+		\item \structure{Projection} $\alert{\Pi_0}\colon L^1(\Omega) \rightarrow \Pd_0(\T_h)$:
 		\begin{equation*}
 			\escalarL{g}{\overline{w}}=
-			\escalarL{\Pi_0 g}{\overline{w}},\forall\,\overline{w}\in \Pd_0(\T_h),
+			\escalarL{\alert{\Pi_0 g}}{\overline{w}},\forall\,\overline{w}\in \Pd_0(\T_h).
 		\end{equation*}
-		\item Regularization $\Pi^h_1\colon L^1(\Omega)\rightarrow \Pc_1(\T_h)$
+		\vspace*{0.1cm}
+		\item \structure{Regularization} $\alert{\Pi^h_1}\colon L^1(\Omega)\rightarrow \Pc_1(\T_h)$
 		\begin{equation*}
-			\escalarL{g}{\overline{\phi}}=\escalarML{\Pi^h_1 g}{\overline{\phi}},\forall\,\overline{\phi}\in \Pc_1(\T_h),
+			\escalarL{g}{\overline{\phi}}=\escalarML{\alert{\Pi^h_1 g}}{\overline{\phi}},\forall\,\overline{\phi}\in \Pc_1(\T_h),
 		\end{equation*}
-		where $\escalarML{\cdot}{\cdot}$ is the mass-lumping scalar product in $\Pc_1(\T_h)$
+		where $\alert{\escalarML{\cdot}{\cdot}}$ is the \structure{mass-lumping scalar product} in $\Pc_1(\T_h)$.
 	\end{itemize}
 \end{frame}
 
