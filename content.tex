@@ -47,7 +47,7 @@
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[scale=0.1]{img/celulas.png}
-		\caption{Interaction between the four species.}
+		\caption{Interaction between the species.}
 	\end{figure}
 	Variables $\alert{u}$ and $\alert{n}$ bounded on $[0,1]$:
 	\begin{itemize}
@@ -94,13 +94,13 @@
 \end{frame}
 
 \begin{frame}{Properties of the model}
+	\begin{proposition}[Mass conservation]
+		The total mass of tumor cells and nutrients is conserved: $$\alert{\frac{d}{dt}\int_\Omega (u(x,t)+n(x,t))dx=0}.$$
+	\end{proposition}
 	\begin{proposition}[Pointwise bounds]
 		Let $u_0,v_0\in[0,1]$, then \alert{$u(t),n(t)\in[0,1]$} for a.e. $t\in(0,T)$.
 	\end{proposition}
 	\vspace*{0.6cm}
-	\begin{proposition}[Mass conservation]
-		The total mass of tumor cells and nutrients is conserved: $$\alert{\frac{d}{dt}\int_\Omega (u(x,t)+n(x,t))dx=0}.$$
-	\end{proposition}
 \end{frame}
 \begin{frame}{Properties of the model}
 	\scriptsize
@@ -128,10 +128,10 @@
 		\end{equation*}
 		\text{Discontinuous Galerkin method:}
 		\begin{equation*}
-			\alert{\Pd_k(\T_h)}\coloneqq\left\{v_h\in L^2(\Omega)\colon v_{h|_{K_i}}\in\mathbb{P}_k(K_i)\text{ with } K_i\in\T_h,\forall i\in\left\{1,2,\ldots,N_{\T_h}\right\}\right\},
+			\alert{\Pd_k(\T_h)}\coloneqq\left\{v_h\in L^2(\Omega)\colon v_{h|_{K_i}}\in\mathbb{P}_k(K_i)\text{ with } K_i\in\T_h,\forall i\in\left\{1,2,\ldots,N_{\T_h}\right\}\right\}.
 		\end{equation*}
 	\end{block}
-	with a basis $\left\{\phi_i\right\}_{i\in\left\{1,2,\ldots,N_h \right\}}$.
+	% with a basis $\left\{\phi_i\right\}_{i\in\left\{1,2,\ldots,N_h \right\}}$.
 	
 	\vspace*{0.3cm}
 	Notation:
@@ -195,13 +195,14 @@
 \end{frame}
 \begin{frame}{Mesh assumptions}
 	With this assumption:
-	$$\nabla\mu \cdot \nn_e \simeq\frac{-\salto{\Pi_0\mu}}{\mathcal{D}_e(\T_h)}= \frac{\Pi_0\mu_L-\Pi_0\mu_K}{\mathcal{D}_e(\T_h)}\eqqcolon \nabla_{\nn_e}^0\mu,$$
-	on every $e=K\cap L\in\Ehi$ with $\mathcal{D}_e(\T_h)$ the distance between the baricenters of the triangles $K$ and $L$.
+	$$\nabla\mu \cdot \nn_e \simeq\frac{-\salto{\Pi_0\mu}}{\mathcal{D}_e(\T_h)}= \frac{\Pi_0\mu_L-\Pi_0\mu_K}{\mathcal{D}_e(\T_h)}\eqqcolon \alert{\nabla_{\nn_e}^0\mu},$$
+	on every $e=K\cap L\in\Ehi$ with $\alert{\mathcal{D}_e(\T_h)}$ the distance between the baricenters of the triangles $K$ and $L$.
 
+	\vspace*{0.3cm}
 	\begin{block}{}
 		For $\mu\in\Pd_1(\T_h)$, $\nabla_{\nn_e}^0\mu$ is the slope of the line between $(C_K, \mu(C_K))$ and $(C_L, \mu(C_L))$, with $C_K, C_L$ the baricenters of $K, L\in\T_h$.
 	\end{block}
-
+	\vspace*{0.3cm}
 	More information in \cite{acosta-soba_KS_2022}.
 \end{frame}
 
@@ -257,34 +258,36 @@
 \end{frame}
 
 \begin{frame}{Properties of the discrete scheme}
-	\begin{proposition}
+	\begin{proposition}[Mass conservation]
 		The total mass of cells and nutrients is conserved: for all $m\ge 0$,
 		\footnotesize
 		\begin{align*}
-		\int_\Omega (u^{m+1}+n^{m+1})=\int_\Omega (u^m+n^m)\quad\text{and}\quad\int_\Omega (\up^{m+1}+n^{m+1})=\int_\Omega (\up^m+n^m).
+		\alert{\int_\Omega (u^{m+1}+n^{m+1})=\int_\Omega (u^m+n^m)}\quad\text{and}\quad\alert{\int_\Omega (\up^{m+1}+n^{m+1})=\int_\Omega (\up^m+n^m)}.
 		\end{align*}
 	\end{proposition}
-	\begin{theorem}
-		Let $u^{m},n^{m}\in[0,1]$, then $u^{m+1},\up^{m+1},n^{m+1}\in[0,1]$.
+	\vspace*{0.3cm}
+	\begin{theorem}[Pointwise bounds]
+		Let $u^{m},n^{m}\in[0,1]$, then $\alert{u^{m+1},\up^{m+1},n^{m+1}\in[0,1]}$.
 	\end{theorem}
-	\begin{theorem}
+	\vspace*{0.3cm}
+	\begin{theorem}[Existence of solution]
 		There is at least one solution of the scheme.
 	\end{theorem}
 \end{frame}
 \begin{frame}{Properties of the discrete scheme}
-	\begin{theorem}
-		Any solution satisfies the following \textbf{discrete energy law}
+	\begin{theorem}[Energy law]
+		Any solution satisfies the following discrete energy law
 		{\footnotesize
 		\begin{align*}
-			\delta_t E(\up^{m+1},n^{m+1})&+C_u\aupw{\mup_u^{m+1}}{M(u^{m+1})}{\Pi_0\mu_u^{m+1}}\\&+C_n\aupw{\mu_n^{m+1}}{M(n^{m+1})}{\mu_n^{m+1}}\notag\\&+\frac{k\varepsilon^2}{2}\int_\Omega|\delta_t\nabla \up^{m+1}|^2+\frac{k}{2\delta}\int_\Omega \vert\delta_t n^{m+1}\vert^2\nonumber\\&+\delta P_0\int_\Omega P(u^{m+1},n^{m+1}) (\mu_n^{m+1}-\mup_u^{m+1})_\oplus ^2
+			\delta_t E(\up^{m+1},n^{m+1})&+C_u\aupw{\mup_u^{m+1}}{M(u^{m+1})}{\Pi_0\mu_u^{m+1}}\\&+C_n\aupw{\mu_n^{m+1}}{M(n^{m+1})}{\mu_n^{m+1}}\notag\\&+\frac{\Delta t\varepsilon^2}{2}\int_\Omega|\delta_t\nabla \up^{m+1}|^2+\frac{\Delta t}{2\delta}\int_\Omega \vert\delta_t n^{m+1}\vert^2\nonumber\\&+\delta P_0\int_\Omega P(u^{m+1},n^{m+1}) (\mu_n^{m+1}-\mup_u^{m+1})_\oplus ^2
 			\le 0.
 		\end{align*}
 		}
 	\end{theorem}
-	\begin{corollary}
-		The scheme is unconditionally energy stable in the sense
+	\begin{corollary}[Energy stability]
+		The scheme is \structure{unconditionally energy stable} in the sense
 		$$
-		E(\up^{m+1},n^{m+1})\le E(\up^{m},n^{m}).
+		\alert{E(\up^{m+1},n^{m+1})\le E(\up^{m},n^{m})}.
 		$$
 	\end{corollary}
 \end{frame}
@@ -317,7 +320,7 @@
 	M(v)=h_{1,1}(v),\quad P(u,n)=h_{1,1}(u)n_\oplus.
 	$$
 
-	Parameters: $C_u=100$, $C_n=100\cdot 10^{-4}$, $P_0=125$  $h\approx 0.14$.
+	Parameters: $C_u=100$, $C_n=100\cdot 10^{-4}$, $P_0=125$,  $h\approx 0.14$.
 \end{frame}
 
 \begin{frame}{Three tumors aggregation ($\chi_0=0$, $\Delta t=10^{-5}$)}
